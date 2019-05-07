@@ -5,6 +5,8 @@
  */
 package main;
 
+import com.eventbrite.juegoadivinador.juego.*;
+
 /**
  *
  * @author nicolas
@@ -16,7 +18,11 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("Hello");
+        System.out.println("Bienvdenido al juego de adivinar el numero!!");
+        Pensador nicolas=new Pensador();
+        Adivinador tamara=new Adivinador();
+        Juego juegoNuevo=new Juego(nicolas,tamara);
+        juegoNuevo.empezarJuego();
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package com.eventbrite.juegoadivinador;
 
+import com.eventbrite.juegoadivinador.numero.*;
 
 import java.util.Arrays;
 import org.junit.Assert;

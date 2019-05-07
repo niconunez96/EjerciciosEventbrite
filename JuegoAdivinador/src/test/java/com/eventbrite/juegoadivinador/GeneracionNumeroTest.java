@@ -5,6 +5,8 @@
  */
 package com.eventbrite.juegoadivinador;
 
+import com.eventbrite.juegoadivinador.numero.NumeroFactory;
+import com.eventbrite.juegoadivinador.numero.Numero;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
