@@ -17,18 +17,20 @@ public class Juego {
     private Adivinador adivinador;
     private boolean gameOver = false;
 
-    public Juego(Pensador pensador, Adivinador adivinador) {
-        this.pensador = pensador;
-        this.adivinador = adivinador;
+    public Juego() {
+        this.pensador = new Pensador();
+        this.adivinador = new Adivinador();
     }
 
-    public void empezarJuego() {
+    public void empezarJuego(int cantidadDeDigitos) {
 
+        pensador.pensarNumero(cantidadDeDigitos);
         pensador.mostrarNumero();
         while (!gameOver) {
 
             String numeroIngresado = this.leerHastaQueSeIngreseLaCantidadCorrectaDeDigitos();
             this.gameOver = adivinador.intentarAdivinar(numeroIngresado, pensador);
+            this.pensador.mostrarCantidadAciertosYRegulares();
 
         }
         System.out.println("Ganaste!");
@@ -38,9 +40,9 @@ public class Juego {
 
         String numeroIngresado;
         do {
-            System.out.println("Ingrese un numero de 4 digitos para adivinar el numero generado por el pensador:");
+            System.out.println("Ingrese un numero de "+this.pensador.longitudDelNumeroPensado() +" digitos para adivinar el numero generado por el pensador:");
             numeroIngresado = this.leerTeclado();
-        } while (numeroIngresado.length() < 4 || numeroIngresado.length() > 4);
+        } while (numeroIngresado.length() < this.pensador.longitudDelNumeroPensado() || numeroIngresado.length() > this.pensador.longitudDelNumeroPensado());
         return numeroIngresado;
     }
 

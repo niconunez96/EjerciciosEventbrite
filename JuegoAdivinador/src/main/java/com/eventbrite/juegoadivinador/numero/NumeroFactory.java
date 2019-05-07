@@ -31,7 +31,7 @@ public class NumeroFactory {
 
         for (int i = 1; i <= cantidadDigitos; i++) {
 
-            int numero = (int) (Math.random() * 9);
+            Integer numero = (int) (Math.random() * 9);
             numeroAAdivinar.agregarNumero(numero);
         }
         return numeroAAdivinar;

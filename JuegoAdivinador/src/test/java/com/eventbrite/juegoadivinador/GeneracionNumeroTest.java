@@ -29,23 +29,35 @@ public class GeneracionNumeroTest {
     }
     
     @Test
-    public void cantidadDeDigitosIgualA4(){
+    public void cantidadDeDigitosIgualA4ConGeneracionAleatoria(){
         
         Assert.assertEquals(4,fabricaNumero.generarNumeroAAdivinar(4).getNumero().size());
     }
     
     @Test
-    public void cantidadDeDigitosIgualA8(){
+    public void cantidadDeDigitosIgualA8ConGeneracionAleatoria(){
        
         Assert.assertEquals(8,fabricaNumero.generarNumeroAAdivinar(8).getNumero().size());
     }
     
     @Test
+    public void cantidadDeDigitosIgualA4ConStringIngresado(){
+        
+        Assert.assertEquals(4,fabricaNumero.convertirStringANumero("4567").longitudNumero());
+    }
+    
+    @Test
+    public void cantidadDeDigitosIgualA8ConStringIngresado(){
+       
+        Assert.assertEquals(8,fabricaNumero.convertirStringANumero("12345678").longitudNumero());
+    }
+    
+    @Test
     public void generaDigitosEntre0Y9(){
         
-      Numero numeroGenerado=fabricaNumero.generarNumeroAAdivinar(4);  
+      Numero numeroGenerado=fabricaNumero.generarNumeroAAdivinar(10);  
       Assert.assertTrue(numeroGenerado.getNumero().stream()
-              .allMatch(n->(Integer.parseInt(n.toString())>=0 && Integer.parseInt(n.toString())<=9)));
+              .allMatch(n->n>=0 && n<=9));
     }
     
     @After

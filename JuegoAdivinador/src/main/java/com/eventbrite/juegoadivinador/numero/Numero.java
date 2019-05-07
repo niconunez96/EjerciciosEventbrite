@@ -10,14 +10,22 @@ import java.util.List;
 
 public class Numero {
 
-    private List numero = null;
+    private List<Integer> numero = null;
 
     public Numero() {
-        numero = new ArrayList<>();
+        numero = new ArrayList<Integer>();
     }
     
-    public void setNumero(List numero){
+    public void setNumero(List<Integer> numero){
         this.numero=numero;
+    }
+    
+    public List<Integer> getNumero(){
+        return this.numero;
+    }
+    
+    public int longitudNumero(){
+        return this.numero.size();
     }
     
     public void agregarNumero(int numero) {
@@ -25,20 +33,17 @@ public class Numero {
         this.numero.add(numero);
     }
     
-    public List getNumero(){
-        return this.numero;
-    }
-    
-    public int cantidadAciertos(List numeroPrueba){
+    public int cantidadAciertos(List<Integer> numeroPrueba){
         
         int cantidadAciertos=0;
         for(int i=0;i<this.numero.size();i++){
             cantidadAciertos=(this.numero.get(i)==numeroPrueba.get(i)) ? cantidadAciertos+1:cantidadAciertos;
         }
+        
         return cantidadAciertos;
     }
     
-    public int cantidadRegulares(List numeroPrueba){
+    public int cantidadRegulares(List<Integer> numeroPrueba){
         
         int cantidadRegulares=0;
         for(int i=0;i<this.numero.size();i++){

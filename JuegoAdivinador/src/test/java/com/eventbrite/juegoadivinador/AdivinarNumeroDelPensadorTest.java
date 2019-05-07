@@ -17,12 +17,12 @@ import org.junit.Test;
  *
  * @author nicolas
  */
-public class AdivinarNumeroDelPensador {
+public class AdivinarNumeroDelPensadorTest {
 
     private Pensador pensador=new Pensador();
     private Numero numeroPensado=new Numero();
 
-    public AdivinarNumeroDelPensador() {
+    public AdivinarNumeroDelPensadorTest() {
     }
 
     @Before

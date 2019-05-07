@@ -14,9 +14,15 @@ import com.eventbrite.juegoadivinador.numero.*;
 public class Pensador {
     
     private Numero numeroAAdivinar;
+    private int cantidadAciertos=0;
+    private int cantidadRegulares=0;
     
     public Pensador(){
-        this.numeroAAdivinar=NumeroFactory.getFabricaNumeros().generarNumeroAAdivinar(4);
+        this.numeroAAdivinar=new Numero();
+    }
+    
+    public void pensarNumero(int longitud){
+        this.numeroAAdivinar=NumeroFactory.getFabricaNumeros().generarNumeroAAdivinar(longitud);
     }
     
     /* Solo para testear*/
@@ -25,20 +31,35 @@ public class Pensador {
         this.numeroAAdivinar=numero;
     }
     
+     public int getCantidadAciertos(){
+        return this.cantidadAciertos;
+    }
+    
+    public int getCantidadRegulares(){
+        return this.cantidadRegulares;
+    }
+    
     public void mostrarNumero(){
         System.out.println("*******");
         this.numeroAAdivinar.getNumero().forEach(n->System.out.print(n));
         System.out.println("\n*******");
     }
     
+    public void mostrarCantidadAciertosYRegulares(){
+        
+        System.out.println("Cantidad de aciertos: "+this.cantidadAciertos+"\nCantidad de regulares: "+this.cantidadRegulares);
+    }
+    
+    public int longitudDelNumeroPensado(){
+        return this.numeroAAdivinar.longitudNumero();
+    }
+    
     public boolean adivinar(Numero numeroPrueba){
         
-        int aciertos=this.numeroAAdivinar.cantidadAciertos(numeroPrueba.getNumero());
-        int regulares=this.numeroAAdivinar.cantidadRegulares(numeroPrueba.getNumero());
-        
-        System.out.println("Cantidad aciertos: "+ aciertos+"\nCantidad regulares: "+regulares);
-        
-        return aciertos==4;
+        this.cantidadAciertos=this.numeroAAdivinar.cantidadAciertos(numeroPrueba.getNumero());
+        this.cantidadRegulares=this.numeroAAdivinar.cantidadRegulares(numeroPrueba.getNumero());
+       
+        return this.cantidadAciertos==this.longitudDelNumeroPensado();
        
     }
 }
