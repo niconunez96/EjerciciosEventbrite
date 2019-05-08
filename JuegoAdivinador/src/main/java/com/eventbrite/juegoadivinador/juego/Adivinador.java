@@ -13,14 +13,56 @@ import com.eventbrite.juegoadivinador.numero.*;
  */
 public class Adivinador {
     
+    private Numero nroOro;
+    
     public Adivinador(){
         
     }
     
-    public boolean intentarAdivinar(String numeroIngresado, Pensador pensador){
+    public void setNumero(Numero numero){
+        this.nroOro=numero;
+    }
+    
+    public boolean intentarAdivinar(Numero numeroPrueba, Pensador pensador){
         
-        Numero numeroPrueba=NumeroFactory.getFabricaNumeros().convertirStringANumero(numeroIngresado);
+        this.nroOro=numeroPrueba;
+        return pensador.adivinar(this.nroOro);
+    }
+    
+    public void adivinarNumero(Pensador pensador){
         
-        return pensador.adivinar(numeroPrueba);
+        int cantidadAciertos;
+        int cantidadAciertosAntigua=0;
+        int cantidadIteraciones=0;
+        
+        this.nroOro=NumeroFactory.getFabricaNumeros().generarNumeroAAdivinar(pensador.longitudDelNumeroPensado());
+        this.intentarAdivinar(this.nroOro, pensador);
+        cantidadAciertos=pensador.getCantidadAciertos();
+        
+        for(int i=1;i<=pensador.longitudDelNumeroPensado();i++){
+            
+            if(cantidadAciertos==pensador.longitudDelNumeroPensado())
+                break;
+            System.out.println(pensador.getCantidadAciertos());
+            while(cantidadAciertos>=pensador.getCantidadAciertos() && cantidadAciertosAntigua<=pensador.getCantidadAciertos()){
+                
+                cantidadAciertosAntigua=pensador.getCantidadAciertos();
+                this.nroOro.modificarUnDigito(i);
+                this.intentarAdivinar(this.nroOro, pensador);
+                pensador.mostrarCantidadAciertosYRegulares();
+                ++cantidadIteraciones;
+            }
+            
+            if(cantidadAciertosAntigua>pensador.getCantidadAciertos()){ 
+                --i;
+                cantidadAciertos=cantidadAciertosAntigua;
+                cantidadAciertosAntigua=0;
+            }
+            System.out.println("Listo nro "+i);
+            cantidadAciertos=pensador.getCantidadAciertos();
+        }
+        
+        System.out.println("El numero que pensaste es: "+this.nroOro.getNumero().toString());
+        System.out.println("Cantidad de iteraciones: "+cantidadIteraciones);
     }
 }

@@ -5,49 +5,40 @@
  */
 package com.eventbrite.juegoadivinador.juego;
 
+import com.eventbrite.juegoadivinador.numero.Numero;
+import com.eventbrite.juegoadivinador.numero.NumeroFactory;
 import java.util.Scanner;
 
 /**
  *
  * @author nicolas
  */
-public class Juego {
+public class JugadorAdivina extends Juego {
     
-    private Pensador pensador;
-    private Adivinador adivinador;
-    private boolean gameOver = false;
-
-    public Juego() {
-        this.pensador = new Pensador();
-        this.adivinador = new Adivinador();
+    public JugadorAdivina(int cantidadDigitosConLosQueVoyAJugar) {
+        this.adivinador=new Adivinador();
+        this.pensador=new Pensador();
+        this.pensador.pensarNumero(cantidadDigitosConLosQueVoyAJugar);
     }
 
-    public void empezarJuego(int cantidadDeDigitos) {
+    @Override
+    public void empezarJuego() {
 
-        pensador.pensarNumero(cantidadDeDigitos);
         pensador.mostrarNumero();
         while (!gameOver) {
 
             String numeroIngresado = this.leerHastaQueSeIngreseLaCantidadCorrectaDeDigitos();
-            this.gameOver = adivinador.intentarAdivinar(numeroIngresado, pensador);
+            Numero numeroAProbar=NumeroFactory.getFabricaNumeros().convertirStringANumero(numeroIngresado);
+            this.gameOver = adivinador.intentarAdivinar(numeroAProbar, pensador);
             this.pensador.mostrarCantidadAciertosYRegulares();
 
         }
         System.out.println("Ganaste!");
     }
 
-    private String leerHastaQueSeIngreseLaCantidadCorrectaDeDigitos() {
-
-        String numeroIngresado;
-        do {
-            System.out.println("Ingrese un numero de "+this.pensador.longitudDelNumeroPensado() +" digitos para adivinar el numero generado por el pensador:");
-            numeroIngresado = this.leerTeclado();
-        } while (numeroIngresado.length() < this.pensador.longitudDelNumeroPensado() || numeroIngresado.length() > this.pensador.longitudDelNumeroPensado());
-        return numeroIngresado;
+    @Override
+    protected void mostrarMensaje(){
+        System.out.println("Ingrese un numero de "+this.pensador.longitudDelNumeroPensado() +" digitos para adivinar el numero generado por el pensador:");
     }
-
-    private String leerTeclado() {
-        Scanner teclado = new Scanner(System.in);
-        return teclado.next();
-    }
+    
 }

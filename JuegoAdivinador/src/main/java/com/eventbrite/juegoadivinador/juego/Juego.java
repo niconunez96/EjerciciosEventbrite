@@ -11,43 +11,39 @@ import java.util.Scanner;
  *
  * @author nicolas
  */
-public class Juego {
+public abstract class Juego {
     
-    private Pensador pensador;
-    private Adivinador adivinador;
-    private boolean gameOver = false;
-
-    public Juego() {
-        this.pensador = new Pensador();
-        this.adivinador = new Adivinador();
+    protected Pensador pensador;
+    protected Adivinador adivinador;
+    protected boolean gameOver=false;
+    
+    public Juego(){
+        this.adivinador=new Adivinador();
+        this.pensador=new Pensador();
     }
-
-    public void empezarJuego(int cantidadDeDigitos) {
-
-        pensador.pensarNumero(cantidadDeDigitos);
-        pensador.mostrarNumero();
-        while (!gameOver) {
-
-            String numeroIngresado = this.leerHastaQueSeIngreseLaCantidadCorrectaDeDigitos();
-            this.gameOver = adivinador.intentarAdivinar(numeroIngresado, pensador);
-            this.pensador.mostrarCantidadAciertosYRegulares();
-
-        }
-        System.out.println("Ganaste!");
-    }
-
-    private String leerHastaQueSeIngreseLaCantidadCorrectaDeDigitos() {
+    
+    abstract public void empezarJuego();
+    
+    protected String leerHastaQueSeIngreseLaCantidadCorrectaDeDigitos() {
 
         String numeroIngresado;
         do {
-            System.out.println("Ingrese un numero de "+this.pensador.longitudDelNumeroPensado() +" digitos para adivinar el numero generado por el pensador:");
+            this.mostrarMensaje();
             numeroIngresado = this.leerTeclado();
-        } while (numeroIngresado.length() < this.pensador.longitudDelNumeroPensado() || numeroIngresado.length() > this.pensador.longitudDelNumeroPensado());
+        } while (this.longitudDeNumeroEsCorrecta(numeroIngresado));
+        
         return numeroIngresado;
     }
 
-    private String leerTeclado() {
+    protected String leerTeclado() {
         Scanner teclado = new Scanner(System.in);
         return teclado.next();
     }
+    
+    protected boolean longitudDeNumeroEsCorrecta(String numeroIngresado){
+        
+        return (numeroIngresado.length() < this.pensador.longitudDelNumeroPensado()) || (numeroIngresado.length() > this.pensador.longitudDelNumeroPensado());
+    }
+    
+    abstract protected void mostrarMensaje();
 }
