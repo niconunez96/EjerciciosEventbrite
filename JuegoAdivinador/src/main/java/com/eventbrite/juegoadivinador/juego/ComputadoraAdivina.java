@@ -25,7 +25,7 @@ public class ComputadoraAdivina extends Juego{
         Numero numeroPensado=NumeroFactory.getFabricaNumeros().convertirStringANumero(this.leerTeclado());
         this.pensador.setNumero(numeroPensado);
         this.pensador.mostrarNumero();
-        this.adivinador.adivinarNumero(pensador);
+        this.adivinador.adivinarNumeroDelPensador(pensador);
         
     }
     

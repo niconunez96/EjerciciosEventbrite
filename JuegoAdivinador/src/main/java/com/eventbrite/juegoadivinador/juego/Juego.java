@@ -24,17 +24,6 @@ public abstract class Juego {
     
     abstract public void empezarJuego();
     
-    protected String leerHastaQueSeIngreseLaCantidadCorrectaDeDigitos() {
-
-        String numeroIngresado;
-        do {
-            this.mostrarMensaje();
-            numeroIngresado = this.leerTeclado();
-        } while (this.longitudDeNumeroEsCorrecta(numeroIngresado));
-        
-        return numeroIngresado;
-    }
-
     protected String leerTeclado() {
         Scanner teclado = new Scanner(System.in);
         return teclado.next();

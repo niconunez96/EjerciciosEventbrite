@@ -12,57 +12,68 @@ import com.eventbrite.juegoadivinador.numero.*;
  * @author nicolas
  */
 public class Adivinador {
+
+    private int cantidadAciertos = 0;
+    private int cantidadAciertosAntigua = 0;
+
+    public Adivinador() {
+
+    }
+
+    public void intentarAdivinar(Numero numeroPrueba, Pensador pensador) {
+
+        pensador.adivinar(numeroPrueba);
+    }
+
+    public void adivinarNumeroDelPensador(Pensador pensador){
     
-    private Numero nroOro;
-    
-    public Adivinador(){
-        
+        Numero numeroPosta=this.descifrarNumero(pensador);
+        System.out.println("El numero que pensaste es "+numeroPosta);
     }
     
-    public void setNumero(Numero numero){
-        this.nroOro=numero;
-    }
-    
-    public boolean intentarAdivinar(Numero numeroPrueba, Pensador pensador){
-        
-        this.nroOro=numeroPrueba;
-        return pensador.adivinar(this.nroOro);
-    }
-    
-    public void adivinarNumero(Pensador pensador){
-        
-        int cantidadAciertos;
-        int cantidadAciertosAntigua=0;
-        int cantidadIteraciones=0;
-        
-        this.nroOro=NumeroFactory.getFabricaNumeros().generarNumeroAAdivinar(pensador.longitudDelNumeroPensado());
-        this.intentarAdivinar(this.nroOro, pensador);
-        cantidadAciertos=pensador.getCantidadAciertos();
-        
-        for(int i=1;i<=pensador.longitudDelNumeroPensado();i++){
-            
-            if(cantidadAciertos==pensador.longitudDelNumeroPensado())
+    public Numero descifrarNumero(Pensador pensador) {
+
+        Numero numeroPosta = new Numero();
+        Numero numeroPrueba = NumeroFactory.getFabricaNumeros().generarNumeroAAdivinar(pensador.longitudDelNumeroPensado());
+        numeroPosta.setNumero(numeroPrueba.getNumero());
+
+        this.intentarAdivinar(numeroPrueba, pensador);
+
+        this.cantidadAciertos = pensador.getCantidadAciertos();
+
+        for (int i = 1; i <= pensador.longitudDelNumeroPensado(); i++) {
+
+            if (pensador.numeroFueAdivinado()) {
                 break;
-            System.out.println(pensador.getCantidadAciertos());
-            while(cantidadAciertos>=pensador.getCantidadAciertos() && cantidadAciertosAntigua<=pensador.getCantidadAciertos()){
-                
-                cantidadAciertosAntigua=pensador.getCantidadAciertos();
-                this.nroOro.modificarUnDigito(i);
-                this.intentarAdivinar(this.nroOro, pensador);
-                pensador.mostrarCantidadAciertosYRegulares();
-                ++cantidadIteraciones;
             }
-            
-            if(cantidadAciertosAntigua>pensador.getCantidadAciertos()){ 
-                --i;
-                cantidadAciertos=cantidadAciertosAntigua;
-                cantidadAciertosAntigua=0;
+
+            this.descifrarDigito(pensador, numeroPrueba, i);
+
+            if (this.cantidadAciertosAntigua > pensador.getCantidadAciertos()) 
+            {
+                numeroPrueba.setNumero(numeroPosta.getNumero());
+                pensador.adivinar(numeroPrueba);
             }
-            System.out.println("Listo nro "+i);
-            cantidadAciertos=pensador.getCantidadAciertos();
+            else 
+            {
+                numeroPosta.setNumero(numeroPrueba.getNumero());
+                this.cantidadAciertos = pensador.getCantidadAciertos();
+            }
         }
-        
-        System.out.println("El numero que pensaste es: "+this.nroOro.getNumero().toString());
-        System.out.println("Cantidad de iteraciones: "+cantidadIteraciones);
+        return numeroPosta;
+
     }
+
+    public void descifrarDigito(Pensador pensador, Numero numeroPrueba, int indice) {
+
+        while (this.cantidadAciertos >= pensador.getCantidadAciertos() && this.cantidadAciertosAntigua <= pensador.getCantidadAciertos()) {
+
+            this.cantidadAciertosAntigua = pensador.getCantidadAciertos();
+            numeroPrueba.modificarUnDigito(indice);
+            System.out.println("Tu numero es " + numeroPrueba.toString() + "?");
+            this.intentarAdivinar(numeroPrueba, pensador);
+            pensador.mostrarCantidadAciertosYRegulares();
+        }
+    }
+
 }

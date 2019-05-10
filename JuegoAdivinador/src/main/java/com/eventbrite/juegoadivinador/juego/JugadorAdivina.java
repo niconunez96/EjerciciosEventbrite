@@ -7,7 +7,6 @@ package com.eventbrite.juegoadivinador.juego;
 
 import com.eventbrite.juegoadivinador.numero.Numero;
 import com.eventbrite.juegoadivinador.numero.NumeroFactory;
-import java.util.Scanner;
 
 /**
  *
@@ -29,13 +28,25 @@ public class JugadorAdivina extends Juego {
 
             String numeroIngresado = this.leerHastaQueSeIngreseLaCantidadCorrectaDeDigitos();
             Numero numeroAProbar=NumeroFactory.getFabricaNumeros().convertirStringANumero(numeroIngresado);
-            this.gameOver = adivinador.intentarAdivinar(numeroAProbar, pensador);
+            adivinador.intentarAdivinar(numeroAProbar, pensador);
+            this.gameOver = pensador.numeroFueAdivinado();
             this.pensador.mostrarCantidadAciertosYRegulares();
 
         }
         System.out.println("Ganaste!");
     }
+    
+    private String leerHastaQueSeIngreseLaCantidadCorrectaDeDigitos() {
 
+        String numeroIngresado;
+        do {
+            this.mostrarMensaje();
+            numeroIngresado = this.leerTeclado();
+        } while (this.longitudDeNumeroEsCorrecta(numeroIngresado));
+        
+        return numeroIngresado;
+    }
+    
     @Override
     protected void mostrarMensaje(){
         System.out.println("Ingrese un numero de "+this.pensador.longitudDelNumeroPensado() +" digitos para adivinar el numero generado por el pensador:");

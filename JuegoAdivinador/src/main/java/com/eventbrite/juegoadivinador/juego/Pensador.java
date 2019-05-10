@@ -39,27 +39,31 @@ public class Pensador {
         return this.cantidadRegulares;
     }
     
-    public void mostrarNumero(){
-        System.out.println("*******");
-        this.numeroAAdivinar.getNumero().forEach(n->System.out.print(n));
-        System.out.println("\n*******");
-    }
-    
-    public void mostrarCantidadAciertosYRegulares(){
-        
-        System.out.println("Cantidad de aciertos: "+this.cantidadAciertos+"\nCantidad de regulares: "+this.cantidadRegulares);
-    }
-    
     public int longitudDelNumeroPensado(){
         return this.numeroAAdivinar.longitudNumero();
     }
     
-    public boolean adivinar(Numero numeroPrueba){
+    public void adivinar(Numero numeroPrueba){
         
         this.cantidadAciertos=this.numeroAAdivinar.cantidadAciertos(numeroPrueba.getNumero());
         this.cantidadRegulares=this.numeroAAdivinar.cantidadRegulares(numeroPrueba.getNumero());
-       
+    }
+    
+    public boolean numeroFueAdivinado(){
+        
         return this.cantidadAciertos==this.longitudDelNumeroPensado();
        
     }
+    
+    public void mostrarNumero(){
+        System.out.println("*******");
+        System.out.println(this.numeroAAdivinar.toString());
+        System.out.println("*******");
+    }
+    
+    public void mostrarCantidadAciertosYRegulares(){
+        System.out.println("Cantidad de aciertos: "+this.cantidadAciertos+"\nCantidad de regulares: "+this.cantidadRegulares);
+    }
+    
+    
 }

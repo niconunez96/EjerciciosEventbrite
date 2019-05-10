@@ -7,7 +7,6 @@ package com.eventbrite.juegoadivinador.numero;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Numero {
@@ -19,7 +18,7 @@ public class Numero {
     }
     
     public void setNumero(List<Integer> numero){
-        this.numero=numero;
+        this.numero=new ArrayList<Integer>(numero);
     }
     
     public List<Integer> getNumero(){
@@ -28,6 +27,12 @@ public class Numero {
     
     public int longitudNumero(){
         return this.numero.size();
+    }
+    
+    @Override 
+    public String toString(){
+        
+        return this.numero.stream().map(n->n.toString()).reduce("",(a,b)->a+b);
     }
     
     public void agregarNumero(int numero) {
@@ -40,7 +45,7 @@ public class Numero {
         int cantidadAciertos=0;
         for(int i=0;i<numeroPrueba.size();i++){
             
-            cantidadAciertos=this.digitoEsUnAcierto(i, numeroPrueba) ? ++cantidadAciertos:cantidadAciertos;
+            cantidadAciertos=this.digitoEsUnAcierto(i, numeroPrueba.get(i)) ? ++cantidadAciertos:cantidadAciertos;
         }
         
         return cantidadAciertos;
@@ -54,24 +59,26 @@ public class Numero {
             
             cantidadRegulares=this.digitoEsRegular(i, numeroPrueba) ? cantidadRegulares+1:cantidadRegulares;
         }
+        
         return cantidadRegulares;
     }
         
-    private boolean digitoEsUnAcierto(int index,List<Integer>nroPrueba){
+    private boolean digitoEsUnAcierto(int index,int digito){
        
-        return nroPrueba.get(index)==this.numero.get(index);
+        return digito==this.numero.get(index);
     }
     
     private boolean digitoEsRegular(int indice,List<Integer> nroPrueba){
         
         return (this.numero.contains(nroPrueba.get(indice))
             && !(this.yaEstanCompletosLosAciertosConDigito(nroPrueba.get(indice),nroPrueba)))
-            && !(this.digitoEsUnAcierto(indice, nroPrueba));
+            && !(this.digitoEsUnAcierto(indice, nroPrueba.get(indice)));
     }
     
     private boolean yaEstanCompletosLosAciertosConDigito(int digito,List<Integer> nroPrueba){
        
-        return this.cantidadDeAciertosQueDeberiaTenerSegunUnDigito(digito) == this.cantidadDeAciertosQueTengoSegunUnDigito(digito, nroPrueba);
+        return this.cantidadDeAciertosQueDeberiaTenerSegunUnDigito(digito) 
+                == this.cantidadDeAciertosQueTengoSegunUnDigito(digito, nroPrueba);
     }
     
     public int cantidadDeAciertosQueDeberiaTenerSegunUnDigito(int digito){
@@ -84,7 +91,7 @@ public class Numero {
         int cantidad=0;
         for(int i=0;i<numero.size();i++){
             
-            cantidad= numero.get(i)==digito && this.digitoEsUnAcierto(i, numero) ? cantidad+1:cantidad;
+            cantidad= numero.get(i)==digito && this.digitoEsUnAcierto(i, numero.get(i)) ? cantidad+1:cantidad;
         }
         return cantidad;
     }

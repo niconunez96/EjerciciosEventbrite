@@ -35,14 +35,16 @@ public class AdivinarNumeroDelPensadorTest {
     public void seAdivinaElNroDelPensador() {
         Numero numero = new Numero();
         numero.setNumero(Arrays.asList(5, 8, 9, 2));
-        Assert.assertTrue(pensador.adivinar(numero));
+        pensador.adivinar(numero);
+        Assert.assertTrue(pensador.numeroFueAdivinado());
     }
     
     @Test
     public void noSeAdivinaElNroDelPensador() {
         Numero numero = new Numero();
         numero.setNumero(Arrays.asList(5, 9, 8, 2));
-        Assert.assertFalse(pensador.adivinar(numero));
+        pensador.adivinar(numero);
+        Assert.assertFalse(pensador.numeroFueAdivinado());
     }
 
     @After
