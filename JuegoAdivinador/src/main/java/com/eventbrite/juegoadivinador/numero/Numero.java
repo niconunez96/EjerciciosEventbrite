@@ -11,36 +11,36 @@ import java.util.stream.Collectors;
 
 public class Numero {
 
-    private List<Integer> numero = null;
+    private List<Integer> digitos = null;
 
     public Numero() {
-        numero = new ArrayList<Integer>();
+        digitos = new ArrayList<Integer>();
     }
     
     public void setNumero(List<Integer> numero){
-        this.numero=new ArrayList<Integer>(numero);
+        this.digitos=new ArrayList<Integer>(numero);
     }
     
     public List<Integer> getNumero(){
-        return this.numero;
+        return this.digitos;
     }
     
     public int longitudNumero(){
-        return this.numero.size();
+        return this.digitos.size();
     }
     
     @Override 
     public String toString(){
         
-        return this.numero.stream().map(n->n.toString()).reduce("",(a,b)->a+b);
+        return this.digitos.stream().map(n->n.toString()).reduce("",(a,b)->a+b);
     }
     
-    public void agregarNumero(int numero) {
+    public void agregarDigito(int numero) {
 
-        this.numero.add(numero);
+        this.digitos.add(numero);
     }
     
-    public int cantidadAciertos(List<Integer> numeroPrueba){
+    public int cuantosDigitosAcerte(List<Integer> numeroPrueba){
         
         int cantidadAciertos=0;
         for(int i=0;i<numeroPrueba.size();i++){
@@ -51,7 +51,7 @@ public class Numero {
         return cantidadAciertos;
     }
     
-    public int cantidadRegulares(List<Integer> numeroPrueba){
+    public int cuantosDigitosSonRegulares(List<Integer> numeroPrueba){
         
         int cantidadRegulares=0;
         
@@ -65,12 +65,12 @@ public class Numero {
         
     private boolean digitoEsUnAcierto(int index,int digito){
        
-        return digito==this.numero.get(index);
+        return digito==this.digitos.get(index);
     }
     
     private boolean digitoEsRegular(int indice,List<Integer> nroPrueba){
         
-        return (this.numero.contains(nroPrueba.get(indice))
+        return (this.digitos.contains(nroPrueba.get(indice))
             && !(this.yaEstanCompletosLosAciertosConDigito(nroPrueba.get(indice),nroPrueba)))
             && !(this.digitoEsUnAcierto(indice, nroPrueba.get(indice)));
     }
@@ -78,15 +78,15 @@ public class Numero {
     private boolean yaEstanCompletosLosAciertosConDigito(int digito,List<Integer> nroPrueba){
        
         return this.cantidadDeAciertosQueDeberiaTenerSegunUnDigito(digito) 
-                == this.cantidadDeAciertosQueTengoSegunUnDigito(digito, nroPrueba);
+                == this.cantidadDeAciertosQueTengoConDigito(digito, nroPrueba);
     }
     
     public int cantidadDeAciertosQueDeberiaTenerSegunUnDigito(int digito){
-        return this.numero.stream()
+        return this.digitos.stream()
                 .filter(n->n==digito).collect(Collectors.toList()).size();
     }
     
-    public int cantidadDeAciertosQueTengoSegunUnDigito(int digito,List<Integer> numero){
+    public int cantidadDeAciertosQueTengoConDigito(int digito,List<Integer> numero){
         
         int cantidad=0;
         for(int i=0;i<numero.size();i++){
@@ -99,8 +99,8 @@ public class Numero {
      public void modificarUnDigito(int indice){
         
         int numeroNuevo= (int) (Math.random()*10);
-        this.numero.add(indice, numeroNuevo);
-        this.numero.remove(indice-1);
+        this.digitos.add(indice, numeroNuevo);
+        this.digitos.remove(indice-1);
        
     }
 

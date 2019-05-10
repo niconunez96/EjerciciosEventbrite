@@ -31,13 +31,13 @@ public class GeneracionNumeroTest {
     @Test
     public void cantidadDeDigitosIgualA4ConGeneracionAleatoria(){
         
-        Assert.assertEquals(4,fabricaNumero.generarNumeroAAdivinar(4).getNumero().size());
+        Assert.assertEquals(4,fabricaNumero.generarNumeroAleatorio(4).getNumero().size());
     }
     
     @Test
     public void cantidadDeDigitosIgualA8ConGeneracionAleatoria(){
        
-        Assert.assertEquals(8,fabricaNumero.generarNumeroAAdivinar(8).getNumero().size());
+        Assert.assertEquals(8,fabricaNumero.generarNumeroAleatorio(8).getNumero().size());
     }
     
     @Test
@@ -55,7 +55,7 @@ public class GeneracionNumeroTest {
     @Test
     public void generaDigitosEntre0Y9(){
         
-      Numero numeroGenerado=fabricaNumero.generarNumeroAAdivinar(10);  
+      Numero numeroGenerado=fabricaNumero.generarNumeroAleatorio(10);  
       Assert.assertTrue(numeroGenerado.getNumero().stream()
               .allMatch(n->n>=0 && n<=9));
     }

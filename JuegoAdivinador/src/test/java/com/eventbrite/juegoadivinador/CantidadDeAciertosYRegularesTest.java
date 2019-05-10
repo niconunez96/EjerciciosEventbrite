@@ -40,35 +40,35 @@ public class CantidadDeAciertosYRegularesTest {
     public void cantidadDeAciertosIgualA0(){
         Numero numeroPrueba=new Numero();
         numeroPrueba.setNumero(Arrays.asList(0,5,8,0));
-        Assert.assertEquals(0,this.numeroAAdivinar.cantidadAciertos(numeroPrueba.getNumero()));
+        Assert.assertEquals(0,this.numeroAAdivinar.cuantosDigitosAcerte(numeroPrueba.getNumero()));
     }
       
     @Test
     public void cantidadDeAciertosEs2(){
         Numero numeroPrueba=new Numero();
         numeroPrueba.setNumero(Arrays.asList(0,1,0,1));
-        Assert.assertEquals(2,this.numeroAAdivinar2.cantidadAciertos(numeroPrueba.getNumero()));
+        Assert.assertEquals(2,this.numeroAAdivinar2.cuantosDigitosAcerte(numeroPrueba.getNumero()));
     }
     
     @Test
     public void aciertaTodos(){
         Numero numeroPrueba=new Numero();
         numeroPrueba.setNumero(Arrays.asList(1,2,3,4));
-        Assert.assertEquals(4,this.numeroAAdivinar.cantidadAciertos(numeroPrueba.getNumero()));
+        Assert.assertEquals(4,this.numeroAAdivinar.cuantosDigitosAcerte(numeroPrueba.getNumero()));
     }
     
     @Test
     public void cantidadDeRegularesEs2(){
         Numero numeroPrueba=new Numero();
         numeroPrueba.setNumero(Arrays.asList(9,8,2,1));
-        Assert.assertEquals(2,this.numeroAAdivinar.cantidadRegulares(numeroPrueba.getNumero()));
+        Assert.assertEquals(2,this.numeroAAdivinar.cuantosDigitosSonRegulares(numeroPrueba.getNumero()));
     }
     
     @Test
     public void cantidadDeAciertosConEl2Es0(){
         Numero numeroPrueba=new Numero();
         numeroPrueba.setNumero(Arrays.asList(9,8,2,1));
-        Assert.assertEquals(0,this.numeroAAdivinar.cantidadDeAciertosQueTengoSegunUnDigito(2, numeroPrueba.getNumero()));
+        Assert.assertEquals(0,this.numeroAAdivinar.cantidadDeAciertosQueTengoConDigito(2, numeroPrueba.getNumero()));
     }
     
     @Test
@@ -82,7 +82,7 @@ public class CantidadDeAciertosYRegularesTest {
     public void cantidadDeRegularesEs0(){
         Numero numeroPrueba=new Numero();
         numeroPrueba.setNumero(Arrays.asList(3,8,3,3));
-        Assert.assertEquals(1,this.numeroAAdivinar3.cantidadRegulares(numeroPrueba.getNumero()));
+        Assert.assertEquals(1,this.numeroAAdivinar3.cuantosDigitosSonRegulares(numeroPrueba.getNumero()));
     }
     
     @After

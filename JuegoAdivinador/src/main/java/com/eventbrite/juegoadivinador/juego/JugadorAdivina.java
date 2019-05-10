@@ -5,6 +5,8 @@
  */
 package com.eventbrite.juegoadivinador.juego;
 
+import Jugadores.Pensador;
+import Jugadores.Adivinador;
 import com.eventbrite.juegoadivinador.numero.Numero;
 import com.eventbrite.juegoadivinador.numero.NumeroFactory;
 
@@ -36,6 +38,11 @@ public class JugadorAdivina extends Juego {
         System.out.println("Ganaste!");
     }
     
+    @Override
+    protected void mostrarMensaje(){
+        System.out.println("Ingrese un numero de "+this.pensador.longitudDelNumeroPensado() +" digitos para adivinar el numero generado por el pensador:");
+    }
+    
     private String leerHastaQueSeIngreseLaCantidadCorrectaDeDigitos() {
 
         String numeroIngresado;
@@ -47,9 +54,11 @@ public class JugadorAdivina extends Juego {
         return numeroIngresado;
     }
     
-    @Override
-    protected void mostrarMensaje(){
-        System.out.println("Ingrese un numero de "+this.pensador.longitudDelNumeroPensado() +" digitos para adivinar el numero generado por el pensador:");
+    protected boolean longitudDeNumeroEsCorrecta(String numeroIngresado){
+        
+        return (numeroIngresado.length() < this.pensador.longitudDelNumeroPensado()) || (numeroIngresado.length() > this.pensador.longitudDelNumeroPensado());
     }
+    
+    
     
 }

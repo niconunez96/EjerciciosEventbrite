@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.eventbrite.juegoadivinador.juego;
+package Jugadores;
 
 import com.eventbrite.juegoadivinador.numero.*;
 
@@ -34,7 +34,7 @@ public class Adivinador {
     public Numero descifrarNumero(Pensador pensador) {
 
         Numero numeroPosta = new Numero();
-        Numero numeroPrueba = NumeroFactory.getFabricaNumeros().generarNumeroAAdivinar(pensador.longitudDelNumeroPensado());
+        Numero numeroPrueba = NumeroFactory.getFabricaNumeros().generarNumeroAleatorio(pensador.longitudDelNumeroPensado());
         numeroPosta.setNumero(numeroPrueba.getNumero());
 
         this.intentarAdivinar(numeroPrueba, pensador);

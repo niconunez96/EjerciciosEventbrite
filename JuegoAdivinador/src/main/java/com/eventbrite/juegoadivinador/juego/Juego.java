@@ -5,6 +5,8 @@
  */
 package com.eventbrite.juegoadivinador.juego;
 
+import Jugadores.Pensador;
+import Jugadores.Adivinador;
 import java.util.Scanner;
 
 /**
@@ -24,15 +26,12 @@ public abstract class Juego {
     
     abstract public void empezarJuego();
     
+    abstract protected void mostrarMensaje();
+    
     protected String leerTeclado() {
         Scanner teclado = new Scanner(System.in);
         return teclado.next();
     }
     
-    protected boolean longitudDeNumeroEsCorrecta(String numeroIngresado){
-        
-        return (numeroIngresado.length() < this.pensador.longitudDelNumeroPensado()) || (numeroIngresado.length() > this.pensador.longitudDelNumeroPensado());
-    }
     
-    abstract protected void mostrarMensaje();
 }

@@ -25,14 +25,14 @@ public class NumeroFactory {
         return fabricaNumeros;
     }
 
-    public Numero generarNumeroAAdivinar(int cantidadDigitos) {
+    public Numero generarNumeroAleatorio(int cantidadDigitos) {
 
         Numero numeroAAdivinar = new Numero();
 
         for (int i = 1; i <= cantidadDigitos; i++) {
 
             Integer numero = (int) (Math.random() * 10);
-            numeroAAdivinar.agregarNumero(numero);
+            numeroAAdivinar.agregarDigito(numero);
         }
         return numeroAAdivinar;
     }
@@ -42,7 +42,7 @@ public class NumeroFactory {
         Numero numero = new Numero();
         for (int i = 0; i < numeroIngresado.length(); i++) {
 
-            numero.agregarNumero((numeroIngresado.charAt(i))-48);
+            numero.agregarDigito((numeroIngresado.charAt(i))-48);
         }
         return numero;
     }

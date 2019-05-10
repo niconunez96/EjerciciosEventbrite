@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.eventbrite.juegoadivinador.juego;
+package Jugadores;
 
 import com.eventbrite.juegoadivinador.numero.*;
 
@@ -21,14 +21,14 @@ public class Pensador {
         this.numeroAAdivinar=new Numero();
     }
     
-    public void pensarNumero(int longitud){
-        this.numeroAAdivinar=NumeroFactory.getFabricaNumeros().generarNumeroAAdivinar(longitud);
-    }
-    
     /* Solo para testear*/
     public void setNumero(Numero numero){
         
         this.numeroAAdivinar=numero;
+    }
+    
+    public void pensarNumero(int longitud){
+        this.numeroAAdivinar=NumeroFactory.getFabricaNumeros().generarNumeroAleatorio(longitud);
     }
     
      public int getCantidadAciertos(){
@@ -45,8 +45,8 @@ public class Pensador {
     
     public void adivinar(Numero numeroPrueba){
         
-        this.cantidadAciertos=this.numeroAAdivinar.cantidadAciertos(numeroPrueba.getNumero());
-        this.cantidadRegulares=this.numeroAAdivinar.cantidadRegulares(numeroPrueba.getNumero());
+        this.cantidadAciertos=this.numeroAAdivinar.cuantosDigitosAcerte(numeroPrueba.getNumero());
+        this.cantidadRegulares=this.numeroAAdivinar.cuantosDigitosSonRegulares(numeroPrueba.getNumero());
     }
     
     public boolean numeroFueAdivinado(){
