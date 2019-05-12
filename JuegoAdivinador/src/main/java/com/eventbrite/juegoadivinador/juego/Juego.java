@@ -5,8 +5,8 @@
  */
 package com.eventbrite.juegoadivinador.juego;
 
-import Jugadores.Pensador;
-import Jugadores.Adivinador;
+import com.eventbrite.juegoadivinador.jugadores.Pensador;
+import com.eventbrite.juegoadivinador.jugadores.Adivinador;
 import java.util.Scanner;
 
 /**

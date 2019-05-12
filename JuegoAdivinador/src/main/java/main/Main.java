@@ -33,7 +33,7 @@ public class Main {
         }while(opcion!=1 && opcion!=2);
         
         if(opcion==1){
-            System.out.println("Hola! ¿cuantos digitos debe tener el numero que tengo a pensar?");
+            System.out.println("Hola! ¿cuantos digitos debe tener el numero que tengo que pensar?");
             int cantidadDigitos=Integer.parseInt(teclado.next());
             juegoNuevo=new JugadorAdivina(cantidadDigitos);
         }

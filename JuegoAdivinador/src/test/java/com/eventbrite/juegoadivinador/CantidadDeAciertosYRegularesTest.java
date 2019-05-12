@@ -65,20 +65,6 @@ public class CantidadDeAciertosYRegularesTest {
     }
     
     @Test
-    public void cantidadDeAciertosConEl2Es0(){
-        Numero numeroPrueba=new Numero();
-        numeroPrueba.setNumero(Arrays.asList(9,8,2,1));
-        Assert.assertEquals(0,this.numeroAAdivinar.cantidadDeAciertosQueTengoConDigito(2, numeroPrueba.getNumero()));
-    }
-    
-    @Test
-    public void cantidadDeAciertosQueDeberiaTenerCon2Es1(){
-        Numero numeroPrueba=new Numero();
-        numeroPrueba.setNumero(Arrays.asList(9,8,2,1));
-        Assert.assertEquals(1,this.numeroAAdivinar.cantidadDeAciertosQueDeberiaTenerSegunUnDigito(2));
-    }
-    
-    @Test
     public void cantidadDeRegularesEs0(){
         Numero numeroPrueba=new Numero();
         numeroPrueba.setNumero(Arrays.asList(3,8,3,3));
@@ -89,9 +75,4 @@ public class CantidadDeAciertosYRegularesTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

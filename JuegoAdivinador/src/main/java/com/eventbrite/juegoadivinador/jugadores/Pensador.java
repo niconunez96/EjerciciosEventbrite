@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Jugadores;
+package com.eventbrite.juegoadivinador.jugadores;
 
 import com.eventbrite.juegoadivinador.numero.*;
 

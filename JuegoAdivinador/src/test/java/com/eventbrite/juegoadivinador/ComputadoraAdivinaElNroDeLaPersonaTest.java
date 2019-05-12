@@ -5,8 +5,8 @@
  */
 package com.eventbrite.juegoadivinador;
 
-import Jugadores.Adivinador;
-import Jugadores.Pensador;
+import com.eventbrite.juegoadivinador.jugadores.Adivinador;
+import com.eventbrite.juegoadivinador.jugadores.Pensador;
 import com.eventbrite.juegoadivinador.numero.Numero;
 import java.util.Arrays;
 import org.junit.After;
@@ -64,11 +64,7 @@ public class ComputadoraAdivinaElNroDeLaPersonaTest {
     
     @After
     public void tearDown() {
+       
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

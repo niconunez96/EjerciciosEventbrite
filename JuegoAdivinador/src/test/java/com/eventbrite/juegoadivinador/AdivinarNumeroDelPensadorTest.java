@@ -5,7 +5,7 @@
  */
 package com.eventbrite.juegoadivinador;
 
-import Jugadores.Pensador;
+import com.eventbrite.juegoadivinador.jugadores.Pensador;
 import com.eventbrite.juegoadivinador.numero.Numero;
 import java.util.Arrays;
 import org.junit.After;

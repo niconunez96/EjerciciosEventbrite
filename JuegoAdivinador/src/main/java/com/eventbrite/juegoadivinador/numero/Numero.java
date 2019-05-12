@@ -7,7 +7,6 @@ package com.eventbrite.juegoadivinador.numero;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Numero {
 
@@ -16,92 +15,66 @@ public class Numero {
     public Numero() {
         digitos = new ArrayList<Integer>();
     }
-    
-    public void setNumero(List<Integer> numero){
-        this.digitos=new ArrayList<Integer>(numero);
+
+    public Numero(List<Integer> numero) {
+        this.digitos = new ArrayList<Integer>(numero);
     }
     
-    public List<Integer> getNumero(){
+    public void setNumero(List<Integer> numero) {
+        this.digitos = new ArrayList<Integer>(numero);
+    }
+
+    public List<Integer> getNumero() {
         return this.digitos;
     }
-    
-    public int longitudNumero(){
+
+    public int longitudNumero() {
         return this.digitos.size();
     }
-    
-    @Override 
-    public String toString(){
-        
-        return this.digitos.stream().map(n->n.toString()).reduce("",(a,b)->a+b);
+
+    @Override
+    public String toString() {
+
+        return this.digitos.stream().map(n -> n.toString()).reduce("", (a, b) -> a + b);
     }
-    
+
     public void agregarDigito(int numero) {
 
         this.digitos.add(numero);
     }
-    
-    public int cuantosDigitosAcerte(List<Integer> numeroPrueba){
-        
-        int cantidadAciertos=0;
-        for(int i=0;i<numeroPrueba.size();i++){
-            
-            cantidadAciertos=this.digitoEsUnAcierto(i, numeroPrueba.get(i)) ? ++cantidadAciertos:cantidadAciertos;
+
+    public int cuantosDigitosAcerte(List<Integer> numeroPrueba) {
+
+        Criterio criterioDigitoEsAcierto = new CriterioDigitoEsAcierto();
+
+        return this.cantidadSegunCriterio(criterioDigitoEsAcierto, numeroPrueba);
+    }
+
+    public int cuantosDigitosSonRegulares(List<Integer> numeroPrueba) {
+
+        Criterio criterioDigitoEsRegular = new CriterioDigitoEsRegular();
+        return this.cantidadSegunCriterio(criterioDigitoEsRegular, numeroPrueba);
+    }
+
+    public int cantidadSegunCriterio(Criterio criterio, List<Integer> numeroPrueba) {
+
+        int cantidad = 0;
+
+        for (int i = 0; i < numeroPrueba.size(); i++) {
+
+            cantidad = criterio.cumpleCriterio(i, this.digitos, numeroPrueba) ? ++cantidad : cantidad;
         }
-        
-        return cantidadAciertos;
-    }
-    
-    public int cuantosDigitosSonRegulares(List<Integer> numeroPrueba){
-        
-        int cantidadRegulares=0;
-        
-        for(int i=0;i<numeroPrueba.size();i++){
-            
-            cantidadRegulares=this.digitoEsRegular(i, numeroPrueba) ? cantidadRegulares+1:cantidadRegulares;
-        }
-        
-        return cantidadRegulares;
-    }
-        
-    private boolean digitoEsUnAcierto(int index,int digito){
-       
-        return digito==this.digitos.get(index);
-    }
-    
-    private boolean digitoEsRegular(int indice,List<Integer> nroPrueba){
-        
-        return (this.digitos.contains(nroPrueba.get(indice))
-            && !(this.yaEstanCompletosLosAciertosConDigito(nroPrueba.get(indice),nroPrueba)))
-            && !(this.digitoEsUnAcierto(indice, nroPrueba.get(indice)));
-    }
-    
-    private boolean yaEstanCompletosLosAciertosConDigito(int digito,List<Integer> nroPrueba){
-       
-        return this.cantidadDeAciertosQueDeberiaTenerSegunUnDigito(digito) 
-                == this.cantidadDeAciertosQueTengoConDigito(digito, nroPrueba);
-    }
-    
-    public int cantidadDeAciertosQueDeberiaTenerSegunUnDigito(int digito){
-        return this.digitos.stream()
-                .filter(n->n==digito).collect(Collectors.toList()).size();
-    }
-    
-    public int cantidadDeAciertosQueTengoConDigito(int digito,List<Integer> numero){
-        
-        int cantidad=0;
-        for(int i=0;i<numero.size();i++){
-            
-            cantidad= numero.get(i)==digito && this.digitoEsUnAcierto(i, numero.get(i)) ? cantidad+1:cantidad;
-        }
+
         return cantidad;
     }
-    
-     public void modificarUnDigito(int indice){
-        
-        int numeroNuevo= (int) (Math.random()*10);
-        this.digitos.add(indice, numeroNuevo);
-        this.digitos.remove(indice-1);
-       
+
+    public void modificarUnDigito(int indice, List<List<Integer>> numerosYaProbados) {
+
+        while(numerosYaProbados.contains(this.digitos)){
+            int numeroNuevo = (int) (Math.random() * 10);
+            this.digitos.add(indice, numeroNuevo);
+            this.digitos.remove(indice - 1);
+        }
     }
 
 }
