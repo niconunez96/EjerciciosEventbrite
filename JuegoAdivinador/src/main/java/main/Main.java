@@ -17,9 +17,11 @@ public class Main {
     /**
      * @param args the command line arguments
      */
+    static Scanner teclado=new Scanner(System.in);
+    
     public static void main(String[] args) {
         // TODO code application logic here
-        Scanner teclado=new Scanner(System.in);
+        
         Juego juegoNuevo=null;
         int opcion=0;
         System.out.println("Bienvenido al juego de adivinar el numero!! por favor seleccione el modo de juego");
@@ -32,17 +34,22 @@ public class Main {
             
         }while(opcion!=1 && opcion!=2);
         
+        
+        juegoNuevo=seleccionaModoDeJuego(opcion);
+        juegoNuevo.empezarJuego();
+        
+    }
+    
+    private static Juego seleccionaModoDeJuego(int opcion){
+     
         if(opcion==1){
             System.out.println("Hola! ¿cuantos digitos debe tener el numero que tengo que pensar?");
             int cantidadDigitos=Integer.parseInt(teclado.next());
-            juegoNuevo=new JugadorAdivina(cantidadDigitos);
+            return new JugadorAdivina(cantidadDigitos);
         }
         else{
-            juegoNuevo=new ComputadoraAdivina();
+            return new ComputadoraAdivina();
         }
-        
-        juegoNuevo.empezarJuego();
-        
     }
     
 }

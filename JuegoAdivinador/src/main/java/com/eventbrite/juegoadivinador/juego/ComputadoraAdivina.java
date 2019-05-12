@@ -33,4 +33,5 @@ public class ComputadoraAdivina extends Juego{
     public void mostrarMensaje(){
         System.out.println("Ingrese el numero que esta pensando (tranquilo yo no puedo ver ese numero :))");
     }
+   
 }

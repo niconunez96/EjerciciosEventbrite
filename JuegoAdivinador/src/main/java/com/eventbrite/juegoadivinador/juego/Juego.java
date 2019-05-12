@@ -27,11 +27,10 @@ public abstract class Juego {
     abstract public void empezarJuego();
     
     abstract protected void mostrarMensaje();
-    
+   
     protected String leerTeclado() {
         Scanner teclado = new Scanner(System.in);
         return teclado.next();
     }
-    
     
 }

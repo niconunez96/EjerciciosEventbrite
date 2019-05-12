@@ -49,11 +49,7 @@ public class Adivinador {
         this.numerosQueYaPregunte.add(new Numero(numeroPrueba.getNumero()));
         this.cantidadAciertos = pensador.getCantidadAciertos();
 
-        for (int i = 1; i <= pensador.longitudDelNumeroPensado(); i++) {
-
-            if (pensador.numeroFueAdivinado()) {
-                break;
-            }
+        for (int i = 1; i <= pensador.longitudDelNumeroPensado() && !pensador.numeroFueAdivinado(); i++) {
 
             this.descifrarDigito(pensador, numeroPrueba, i);
 

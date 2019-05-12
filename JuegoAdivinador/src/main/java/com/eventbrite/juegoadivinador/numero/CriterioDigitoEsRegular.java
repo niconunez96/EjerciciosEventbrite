@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -32,7 +32,7 @@ public class CriterioDigitoEsRegular implements Criterio {
                 == this.cantidadDeAciertosQueTengoConDigito(digito, digitosPosta, digitosPrueba);
     }
     
-    public int cantidadDeAciertosQueTengoConDigito(int digito,List<Integer> digitosPosta,List<Integer> digitosPrueba){
+    private int cantidadDeAciertosQueTengoConDigito(int digito,List<Integer> digitosPosta,List<Integer> digitosPrueba){
         
         int cantidad=0;
         for(int i=0;i<digitosPrueba.size();i++){
@@ -42,12 +42,12 @@ public class CriterioDigitoEsRegular implements Criterio {
         return cantidad;
     }
     
-    public int cantidadDeAciertosQueDeberiaTenerSegunUnDigito(int digito,List<Integer> digitosPosta){
+    private int cantidadDeAciertosQueDeberiaTenerSegunUnDigito(int digito,List<Integer> digitosPosta){
         return digitosPosta.stream()
                 .filter(n->n==digito).collect(Collectors.toList()).size();
     }
     
-    public boolean digitosSonIguales(int digito1,int digito2){
+    private boolean digitosSonIguales(int digito1,int digito2){
         return digito1==digito2;
     }
 }
