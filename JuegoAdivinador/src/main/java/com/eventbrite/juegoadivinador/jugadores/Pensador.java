@@ -31,14 +31,6 @@ public class Pensador {
         this.numeroAAdivinar=NumeroFactory.getFabricaNumeros().generarNumeroAleatorio(longitud);
     }
     
-     public int getCantidadAciertos(){
-        return this.cantidadAciertos;
-    }
-    
-    public int getCantidadRegulares(){
-        return this.cantidadRegulares;
-    }
-    
     public int longitudDelNumeroPensado(){
         return this.numeroAAdivinar.longitudNumero();
     }

@@ -68,12 +68,22 @@ public class Numero {
         return cantidad;
     }
 
-    public void modificarUnDigito(int indice, List<List<Integer>> numerosYaProbados) {
+    public void incrementar(){
+        
+        int numeroInt=Integer.parseInt(this.toString());
+        numeroInt++;
+        String numeroString=Integer.toString(numeroInt);
+        switch(numeroString.length()){
+            case 1: numeroString="000"+numeroString;
+            break;
+            case 2: numeroString="00"+numeroString;
+            break;
+            case 3: numeroString="0"+numeroString;
+        }
+        this.digitos.removeIf(n->true);
+        for (int i = 0; i < numeroString.length(); i++) {
 
-        while(numerosYaProbados.contains(this.digitos)){
-            int numeroNuevo = (int) (Math.random() * 10);
-            this.digitos.add(indice, numeroNuevo);
-            this.digitos.remove(indice - 1);
+            this.agregarDigito((numeroString.charAt(i))-48);
         }
     }
 

@@ -5,8 +5,7 @@
  */
 package com.eventbrite.juegoadivinador.juego;
 
-import com.eventbrite.juegoadivinador.numero.Numero;
-import com.eventbrite.juegoadivinador.numero.NumeroFactory;
+import com.eventbrite.juegoadivinador.jugadores.Adivinador;
 
 /**
  *
@@ -14,24 +13,41 @@ import com.eventbrite.juegoadivinador.numero.NumeroFactory;
  */
 public class ComputadoraAdivina extends Juego{
     
+    private String cantAciertos;
+    private String cantRegulares;
+    private Adivinador adivinador;
     public ComputadoraAdivina(){
-        super();
+        
+        this.adivinador=new Adivinador();
+        this.cantAciertos="0";
+        this.cantRegulares="0";
     }
     
     @Override
     public void empezarJuego(){
         
-        this.mostrarMensaje();
-        Numero numeroPensado=NumeroFactory.getFabricaNumeros().convertirStringANumero(this.leerTeclado());
-        this.pensador.setNumero(numeroPensado);
-        this.pensador.mostrarNumero();
-        this.adivinador.adivinarNumeroDelPensador(pensador);
+        while(!this.gameOver){
+            adivinador.generarNumeroPrueba();
+            adivinador.mostrarNumeroPrueba();
+            
+            this.leerAciertosYRegulares();
+            adivinador.agregarRestriccion(Integer.parseInt(cantAciertos),Integer.parseInt(cantRegulares));
+            
+            this.gameOver=Integer.parseInt(cantAciertos)==4;
+        }
+        this.mostrarMensajeDeFinalizacion();
         
     }
     
     @Override
-    public void mostrarMensaje(){
-        System.out.println("Ingrese el numero que esta pensando (tranquilo yo no puedo ver ese numero :))");
+    protected void mostrarMensajeDeFinalizacion(){
+        System.out.println("Gane!!!");
+    }
+    private void leerAciertosYRegulares(){
+        System.out.println("Cuantos aciertos tuve?");
+        this.cantAciertos=this.leerTeclado();
+        System.out.println("Cuantas regulares tuve?");
+        this.cantRegulares=this.leerTeclado();
     }
    
 }

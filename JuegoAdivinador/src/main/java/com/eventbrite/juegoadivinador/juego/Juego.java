@@ -15,18 +15,15 @@ import java.util.Scanner;
  */
 public abstract class Juego {
     
-    protected Pensador pensador;
-    protected Adivinador adivinador;
     protected boolean gameOver=false;
     
     public Juego(){
-        this.adivinador=new Adivinador();
-        this.pensador=new Pensador();
+        
     }
     
     abstract public void empezarJuego();
     
-    abstract protected void mostrarMensaje();
+    abstract protected void mostrarMensajeDeFinalizacion();
    
     protected String leerTeclado() {
         Scanner teclado = new Scanner(System.in);

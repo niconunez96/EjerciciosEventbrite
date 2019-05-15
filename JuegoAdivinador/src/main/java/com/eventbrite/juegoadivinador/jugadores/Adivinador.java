@@ -7,8 +7,8 @@ package com.eventbrite.juegoadivinador.jugadores;
 
 import com.eventbrite.juegoadivinador.numero.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -16,74 +16,30 @@ import java.util.stream.Collectors;
  */
 public class Adivinador {
 
-    private int cantidadAciertos = 0;
-    private int cantidadAciertosAntigua = 0;
-    private static int cantidadIteraciones=0;
-    private List<Numero> numerosQueYaPregunte=new ArrayList<Numero>();
+    private List<Restriccion> restriccionesACumplir;
+    private Numero nroPrueba;
     
     public Adivinador() {
         
-        this.numerosQueYaPregunte=new ArrayList<Numero>();
+        this.restriccionesACumplir=new ArrayList<Restriccion>();
+        this.nroPrueba=new Numero(Arrays.asList(0,0,0,0));
     }
 
-    public void intentarAdivinar(Numero numeroPrueba, Pensador pensador) {
-
-        pensador.adivinar(numeroPrueba);
-    }
-
-    public void adivinarNumeroDelPensador(Pensador pensador){
+    public void agregarRestriccion(int cantAciertos,int cantRegulares){
     
-        Numero numeroPosta=this.descifrarNumero(pensador);
-        System.out.println("El numero que pensaste es "+numeroPosta);
-        System.out.println("Cantidad de preguntas: "+cantidadIteraciones);
+        this.restriccionesACumplir.add(new Restriccion(cantAciertos,cantRegulares,this.nroPrueba));
     }
     
-    public Numero descifrarNumero(Pensador pensador) {
-
-        Numero numeroPosta = new Numero();
-        Numero numeroPrueba = NumeroFactory.getFabricaNumeros().generarNumeroAleatorio(pensador.longitudDelNumeroPensado());
+    public void generarNumeroPrueba(){
         
-        
-        numeroPosta.setNumero(numeroPrueba.getNumero());
-        this.intentarAdivinar(numeroPrueba, pensador);
-        this.numerosQueYaPregunte.add(new Numero(numeroPrueba.getNumero()));
-        this.cantidadAciertos = pensador.getCantidadAciertos();
-
-        for (int i = 1; i <= pensador.longitudDelNumeroPensado() && !pensador.numeroFueAdivinado(); i++) {
-
-            this.descifrarDigito(pensador, numeroPrueba, i);
-
-            if (this.cantidadAciertosAntigua > pensador.getCantidadAciertos()) 
-            {
-                numeroPrueba.setNumero(numeroPosta.getNumero());
-                pensador.adivinar(numeroPrueba);
-            }
-            else 
-            {
-                numeroPosta.setNumero(numeroPrueba.getNumero());
-                this.cantidadAciertos = pensador.getCantidadAciertos();
-            }
-        }
-        return numeroPosta;
-
+        while(!restriccionesACumplir.stream().allMatch(restr->restr.cumpleRestriccion(nroPrueba))){
+            
+            this.nroPrueba.incrementar();
+        }  
     }
-
-    public void descifrarDigito(Pensador pensador, Numero numeroPrueba, int indice) {
-
-        while (this.cantidadAciertos >= pensador.getCantidadAciertos() && this.cantidadAciertosAntigua <= pensador.getCantidadAciertos()) {
-
-            this.cantidadAciertosAntigua = pensador.getCantidadAciertos();
-            numeroPrueba.modificarUnDigito(indice,this.numerosQueYaPregunte.stream().map(n->n.getNumero()).collect(Collectors.toList()));
-            
-            System.out.println("Tu numero es " + numeroPrueba.toString() + "?");
-            
-            this.intentarAdivinar(numeroPrueba, pensador);
-            this.numerosQueYaPregunte.add(new Numero(numeroPrueba.getNumero()));
-            cantidadIteraciones++;
-            pensador.mostrarCantidadAciertosYRegulares();
-        }
-        
-        this.numerosQueYaPregunte.removeIf(n->true);
+    
+    public void mostrarNumeroPrueba(){
+        System.out.println("Tu numero es "+this.nroPrueba.toString()+"?");
     }
 
 }

@@ -6,7 +6,6 @@
 package com.eventbrite.juegoadivinador.juego;
 
 import com.eventbrite.juegoadivinador.jugadores.Pensador;
-import com.eventbrite.juegoadivinador.jugadores.Adivinador;
 import com.eventbrite.juegoadivinador.numero.Numero;
 import com.eventbrite.juegoadivinador.numero.NumeroFactory;
 
@@ -16,8 +15,9 @@ import com.eventbrite.juegoadivinador.numero.NumeroFactory;
  */
 public class JugadorAdivina extends Juego {
     
+    private Pensador pensador;
+    
     public JugadorAdivina(int cantidadDigitosConLosQueVoyAJugar) {
-        this.adivinador=new Adivinador();
         this.pensador=new Pensador();
         this.pensador.pensarNumero(cantidadDigitosConLosQueVoyAJugar);
     }
@@ -30,17 +30,21 @@ public class JugadorAdivina extends Juego {
 
             String numeroIngresado = this.leerHastaQueSeIngreseLaCantidadCorrectaDeDigitos();
             Numero numeroAProbar=NumeroFactory.getFabricaNumeros().convertirStringANumero(numeroIngresado);
-            adivinador.intentarAdivinar(numeroAProbar, pensador);
+            pensador.adivinar(numeroAProbar);
             this.gameOver = pensador.numeroFueAdivinado();
             this.pensador.mostrarCantidadAciertosYRegulares();
 
         }
-        System.out.println("Ganaste!");
+        this.mostrarMensaje();
+    }
+    
+    private void mostrarMensaje(){
+        System.out.println("Ingrese un numero de "+this.pensador.longitudDelNumeroPensado() +" digitos para adivinar el numero generado por el pensador:");
     }
     
     @Override
-    protected void mostrarMensaje(){
-        System.out.println("Ingrese un numero de "+this.pensador.longitudDelNumeroPensado() +" digitos para adivinar el numero generado por el pensador:");
+    protected void mostrarMensajeDeFinalizacion(){
+        System.out.println("El numero que ingresaste es el que habia pensado, ganaste!!");
     }
     
     private String leerHastaQueSeIngreseLaCantidadCorrectaDeDigitos() {
@@ -58,7 +62,5 @@ public class JugadorAdivina extends Juego {
         
         return (numeroIngresado.length() < this.pensador.longitudDelNumeroPensado()) || (numeroIngresado.length() > this.pensador.longitudDelNumeroPensado());
     }
-    
-    
     
 }
