@@ -19,11 +19,7 @@ public class Numero {
     public Numero(List<Integer> numero) {
         this.digitos = new ArrayList<Integer>(numero);
     }
-    
-    public void setNumero(List<Integer> numero) {
-        this.digitos = new ArrayList<Integer>(numero);
-    }
-
+   
     public List<Integer> getNumero() {
         return this.digitos;
     }

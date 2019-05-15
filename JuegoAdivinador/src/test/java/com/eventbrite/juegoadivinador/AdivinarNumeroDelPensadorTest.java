@@ -20,29 +20,28 @@ import org.junit.Test;
 public class AdivinarNumeroDelPensadorTest {
 
     private Pensador pensador=new Pensador();
-    private Numero numeroPensado=new Numero();
+    private Numero numeroPensado;
 
     public AdivinarNumeroDelPensadorTest() {
     }
 
     @Before
     public void init() {
-     this.numeroPensado.setNumero(Arrays.asList(5,8,9,2));
+     this.numeroPensado=new Numero(Arrays.asList(5,8,9,2));
      this.pensador.setNumero(numeroPensado);
     }
 
     @Test
     public void seAdivinaElNroDelPensador() {
-        Numero numero = new Numero();
-        numero.setNumero(Arrays.asList(5, 8, 9, 2));
+        Numero numero = new Numero(Arrays.asList(5, 8, 9, 2));
+       
         pensador.adivinar(numero);
         Assert.assertTrue(pensador.numeroFueAdivinado());
     }
     
     @Test
     public void noSeAdivinaElNroDelPensador() {
-        Numero numero = new Numero();
-        numero.setNumero(Arrays.asList(5, 9, 8, 2));
+        Numero numero = new Numero(Arrays.asList(5, 9, 8, 2));
         pensador.adivinar(numero);
         Assert.assertFalse(pensador.numeroFueAdivinado());
     }
