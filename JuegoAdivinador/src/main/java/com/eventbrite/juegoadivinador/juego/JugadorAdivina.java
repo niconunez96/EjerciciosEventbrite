@@ -35,7 +35,7 @@ public class JugadorAdivina extends Juego {
             this.pensador.mostrarCantidadAciertosYRegulares();
 
         }
-        this.mostrarMensaje();
+        this.mostrarMensajeDeFinalizacion();
     }
     
     private void mostrarMensaje(){
