@@ -7,4 +7,5 @@ Parte 2: Hacer un programa donde un humano piensa el numero y la computadora lo 
 
 
 
-![thinking](https://raw.githubusercontent.com/niconunez96/adivinadorEventBrite/master/thinking.png)
+![thinking](https://raw.githubusercontent.com/niconunez96/EjerciciosEventbrite/master/Parte1/thinking.png)
+
